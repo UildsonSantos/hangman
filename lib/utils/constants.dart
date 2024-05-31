@@ -1,3 +1,10 @@
+List wordsList = [
+  'FLUTTER',
+  'PROGRAMMING',
+  'PYTHON',
+  'SOCCER',
+];
+
 List<String> letters = [
   'A',
   'B',
