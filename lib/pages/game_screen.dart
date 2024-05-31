@@ -15,6 +15,15 @@ class _GameScreenState extends State<GameScreen> {
   List guessedAlphabets = [];
   int points = 0;
   int status = 0;
+  List<String> images = [
+    'assets/images/hangman0.png',
+    'assets/images/hangman1.png',
+    'assets/images/hangman2.png',
+    'assets/images/hangman3.png',
+    'assets/images/hangman4.png',
+    'assets/images/hangman5.png',
+    'assets/images/hangman6.png',
+  ];
 
   String handleText() {
     String displayWord = '';
@@ -105,10 +114,10 @@ class _GameScreenState extends State<GameScreen> {
                   ),
                 ),
               ),
-              const Image(
+              Image(
                 width: 155,
                 height: 155,
-                image: AssetImage('assets/images/hangman0.png'),
+                image: AssetImage(images[status]),
                 color: Colors.white,
                 fit: BoxFit.cover,
               ),
