@@ -123,7 +123,7 @@ class _GameScreenState extends State<GameScreen> {
               ),
               const SizedBox(height: 15),
               Text(
-                '7 lives left',
+                '${7 - status} lives left',
                 style: retroStyle(
                   size: 18,
                   color: Colors.grey,
