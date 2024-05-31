@@ -25,6 +25,62 @@ class _GameScreenState extends State<GameScreen> {
     'assets/images/hangman6.png',
   ];
 
+  openDialog(String title) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: Container(
+            width: MediaQuery.of(context).size.width / 2,
+            height: 180,
+            decoration: const BoxDecoration(color: Colors.purpleAccent),
+            child: Column(
+              children: [
+                Text(
+                  title,
+                  style: retroStyle(
+                    size: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  'You points: $points',
+                  style: retroStyle(
+                    size: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Center(
+                      child: Text(
+                        'Play Again',
+                        style: retroStyle(
+                          size: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   String handleText() {
     String displayWord = '';
     for (var i = 0; i < word.length; i++) {
@@ -50,7 +106,7 @@ class _GameScreenState extends State<GameScreen> {
         points -= 5;
       });
     } else {
-      // TODO: You Lost
+      openDialog('You Lost');
     }
 
     bool isWon = true;
