@@ -33,6 +33,46 @@ class _GameScreenState extends State<GameScreen> {
           )
         ],
       ),
+      body: SingleChildScrollView(
+        child: Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width / 3.5,
+                height: 30,
+                decoration: const BoxDecoration(color: Colors.lightBlueAccent),
+                child: Text(
+                  '12 points',
+                  style: retroStyle(
+                    size: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const Image(
+                width: 155,
+                height: 155,
+                image: AssetImage('assets/images/hangman0.png'),
+                color: Colors.white,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(height: 15),
+              Text(
+                '7 lives left',
+                style: retroStyle(
+                  size: 18,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
