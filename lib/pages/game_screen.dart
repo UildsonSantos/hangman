@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:hangman/utils/utils.dart';
 
@@ -11,6 +12,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  AudioPlayer audioPlayer = AudioPlayer();
   String word = wordsList[Random().nextInt(wordsList.length)];
   List guessedAlphabets = [];
   int points = 0;
@@ -24,6 +26,10 @@ class _GameScreenState extends State<GameScreen> {
     'assets/images/hangman5.png',
     'assets/images/hangman6.png',
   ];
+
+  Future<void> playSound(String sound) async {
+    await audioPlayer.play(AssetSource('assets/sounds/$sound'));
+  }
 
   openDialog(String title) {
     return showDialog(
@@ -60,6 +66,7 @@ class _GameScreenState extends State<GameScreen> {
                   margin: const EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 2,
                   child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.white),
                     onPressed: () {
                       Navigator.pop(context);
                       setState(() {
@@ -68,6 +75,7 @@ class _GameScreenState extends State<GameScreen> {
                         points = 0;
                         word = wordsList[Random().nextInt(wordsList.length)];
                       });
+                      playSound('restart.mp3');
                     },
                     child: Center(
                       child: Text(
@@ -109,13 +117,16 @@ class _GameScreenState extends State<GameScreen> {
         guessedAlphabets.add(letter);
         points += 5;
       });
+      playSound('correct.mp3');
     } else if (status != 6) {
       setState(() {
         status += 1;
         points -= 5;
       });
+      playSound('wrong.mp3');
     } else {
       openDialog('You Lost');
+      playSound('lost.mp3');
     }
 
     bool isWon = true;
@@ -131,6 +142,7 @@ class _GameScreenState extends State<GameScreen> {
 
     if (isWon) {
       openDialog('Hurray, you Won!');
+      playSound('won.mp3');
     }
   }
 
