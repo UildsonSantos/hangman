@@ -34,6 +34,7 @@ class _GameScreenState extends State<GameScreen> {
         ],
       ),
       body: SingleChildScrollView(
+        physics: const ScrollPhysics(),
         child: Container(
           alignment: Alignment.center,
           child: Column(
@@ -69,6 +70,37 @@ class _GameScreenState extends State<GameScreen> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
+              const SizedBox(height: 30),
+              Text(
+                '??????',
+                style: retroStyle(
+                  size: 53,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              GridView.count(
+                crossAxisCount: 7,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: letters.map((letter) {
+                  return InkWell(
+                    onTap: () {},
+                    child: Center(
+                      child: Text(
+                        letter,
+                        style: retroStyle(
+                          size: 30,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              )
             ],
           ),
         ),
