@@ -13,6 +13,8 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   String word = wordsList[Random().nextInt(wordsList.length)];
   List guessedAlphabets = [];
+  int points = 0;
+  int status = 0;
 
   String handleText() {
     String displayWord = '';
@@ -31,7 +33,30 @@ class _GameScreenState extends State<GameScreen> {
     if (word.contains(letter)) {
       setState(() {
         guessedAlphabets.add(letter);
+        points += 5;
       });
+    } else if (status != 6) {
+      setState(() {
+        status += 1;
+        points -= 5;
+      });
+    } else {
+      // TODO: You Lost
+    }
+
+    bool isWon = true;
+    for (var i = 0; i < word.length; i++) {
+      String char = word[i];
+      if (!guessedAlphabets.contains(char)) {
+        setState(() {
+          isWon = false;
+        });
+        break;
+      }
+    }
+
+    if (isWon) {
+      // TODO: You Won
     }
   }
 
@@ -72,7 +97,7 @@ class _GameScreenState extends State<GameScreen> {
                 height: 30,
                 decoration: const BoxDecoration(color: Colors.lightBlueAccent),
                 child: Text(
-                  '12 points',
+                  '$points points',
                   style: retroStyle(
                     size: 15,
                     color: Colors.black,
