@@ -19,12 +19,20 @@ class _GameScreenState extends State<GameScreen> {
     for (var i = 0; i < word.length; i++) {
       String char = word[i];
       if (guessedAlphabets.contains(char)) {
-        displayWord += char;
+        displayWord += '$char ';
       } else {
         displayWord += '? ';
       }
     }
     return displayWord;
+  }
+
+  checkLetter(String letter) {
+    if (word.contains(letter)) {
+      setState(() {
+        guessedAlphabets.add(letter);
+      });
+    }
   }
 
   @override
@@ -105,7 +113,7 @@ class _GameScreenState extends State<GameScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 children: letters.map((letter) {
                   return InkWell(
-                    onTap: () {},
+                    onTap: () => checkLetter(letter),
                     child: Center(
                       child: Text(
                         letter,
