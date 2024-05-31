@@ -22,3 +22,8 @@ flutter:
     - family: RetroGaming
       fonts:
         - asset: assets/fonts/RetroGaming.ttf
+
+  assets:
+    - assets/images/
+    - assets/sounds/
+    
