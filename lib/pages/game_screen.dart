@@ -27,6 +27,7 @@ class _GameScreenState extends State<GameScreen> {
 
   openDialog(String title) {
     return showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return Dialog(
@@ -59,13 +60,21 @@ class _GameScreenState extends State<GameScreen> {
                   margin: const EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 2,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                      setState(() {
+                        status = 0;
+                        guessedAlphabets.clear();
+                        points = 0;
+                        word = wordsList[Random().nextInt(wordsList.length)];
+                      });
+                    },
                     child: Center(
                       child: Text(
                         'Play Again',
                         style: retroStyle(
                           size: 20,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.center,
@@ -121,7 +130,7 @@ class _GameScreenState extends State<GameScreen> {
     }
 
     if (isWon) {
-      // TODO: You Won
+      openDialog('Hurray, you Won!');
     }
   }
 
