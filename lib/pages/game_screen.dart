@@ -17,6 +17,7 @@ class _GameScreenState extends State<GameScreen> {
   List guessedAlphabets = [];
   int points = 0;
   int status = 0;
+  bool soundOn = true;
   List<String> images = [
     'assets/images/hangman0.png',
     'assets/images/hangman1.png',
@@ -28,7 +29,9 @@ class _GameScreenState extends State<GameScreen> {
   ];
 
   Future<void> playSound(String sound) async {
-    await audioPlayer.play(AssetSource('assets/sounds/$sound'));
+    if (soundOn) {
+      await audioPlayer.play(AssetSource('assets/sounds/$sound'));
+    }
   }
 
   openDialog(String title) {
@@ -164,9 +167,14 @@ class _GameScreenState extends State<GameScreen> {
         actions: [
           IconButton(
             iconSize: 40,
-            icon: const Icon(Icons.volume_up_sharp),
+            icon:
+                Icon(soundOn ? Icons.volume_up_sharp : Icons.volume_off_sharp),
             color: Colors.purpleAccent,
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                soundOn = !soundOn;
+              });
+            },
           )
         ],
       ),
