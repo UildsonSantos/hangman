@@ -30,7 +30,7 @@ class _GameScreenState extends State<GameScreen> {
 
   Future<void> playSound(String sound) async {
     if (soundOn) {
-      await audioPlayer.play(AssetSource('assets/sounds/$sound'));
+      await audioPlayer.play(AssetSource('sounds/$sound'));
     }
   }
 
